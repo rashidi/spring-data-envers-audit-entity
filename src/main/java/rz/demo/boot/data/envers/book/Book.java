@@ -1,6 +1,7 @@
 package rz.demo.boot.data.envers.book;
 
 import lombok.*;
+import rz.demo.boot.data.envers.audit.AuditEnabledEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +15,10 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Builder
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Book {
+public class Book extends AuditEnabledEntity {
 
     @Id
     @GeneratedValue

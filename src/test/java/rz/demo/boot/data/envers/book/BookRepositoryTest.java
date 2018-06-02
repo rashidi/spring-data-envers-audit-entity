@@ -6,17 +6,24 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.test.context.junit4.SpringRunner;
+import rz.demo.boot.data.envers.audit.AuditConfiguration;
+import rz.demo.boot.data.envers.audit.AuditorAwareImpl;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
+import static org.springframework.context.annotation.FilterType.ASSIGNABLE_TYPE;
 
 /**
  * @author Rashidi Zin
  */
-@DataJpaTest
+@DataJpaTest(includeFilters = @Filter(
+        type = ASSIGNABLE_TYPE,
+        classes = {AuditorAwareImpl.class, AuditConfiguration.class}
+))
 @RunWith(SpringRunner.class)
 public class BookRepositoryTest {
 
@@ -41,5 +48,15 @@ public class BookRepositoryTest {
                 .isNotEmpty()
                 .extracting(Book::getAuthor, Book::getTitle)
                 .containsExactly(tuple("Rudyard Kipling", "Jungle Book"));
+    }
+
+    @Test
+    public void hasAuditInformation() {
+        Book book = repository.getOne(1L);
+
+        assertThat(book)
+                .extracting(Book::getCreatedBy, Book::getCreatedDate, Book::getLastModifiedBy, Book::getLastModifiedDate, Book::getVersion)
+                .isNotNull();
+
     }
 }
