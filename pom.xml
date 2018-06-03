@@ -9,7 +9,14 @@
     <packaging>jar</packaging>
 
     <name>demo-data-envers</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Sample application that demonstrates entity revisions with Spring Data Envers.</description>
+
+    <developers>
+        <developer>
+            <name>Rashidi Zin</name>
+            <email>rashidi@zin.my</email>
+        </developer>
+    </developers>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
