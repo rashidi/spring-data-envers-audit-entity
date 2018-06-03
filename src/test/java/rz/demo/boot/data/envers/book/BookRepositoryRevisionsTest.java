@@ -5,9 +5,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.envers.repository.support.DefaultRevisionMetadata;
 import org.springframework.data.history.Revision;
 import org.springframework.data.history.Revisions;
 import org.springframework.test.context.junit4.SpringRunner;
+import rz.demo.boot.data.envers.audit.AuditRevisionEntity;
 
 import java.util.Iterator;
 import java.util.Optional;
@@ -44,6 +46,13 @@ public class BookRepositoryRevisionsTest {
                 .allSatisfy(revision -> assertThat(revision.getEntity())
                         .extracting(Book::getId, Book::getAuthor, Book::getTitle)
                         .containsExactly(book.getId(), book.getAuthor(), book.getTitle())
+                )
+                .allSatisfy(revision -> {
+                            DefaultRevisionMetadata metadata = (DefaultRevisionMetadata) revision.getMetadata();
+                            AuditRevisionEntity revisionEntity = metadata.getDelegate();
+
+                            assertThat(revisionEntity.getUsername()).isEqualTo("wade.wilson");
+                        }
                 );
     }
 
