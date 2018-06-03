@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.test.context.junit4.SpringRunner;
+import rz.demo.boot.data.envers.RepositoryConfiguration;
 import rz.demo.boot.data.envers.audit.AuditConfiguration;
 import rz.demo.boot.data.envers.audit.AuditorAwareImpl;
 
@@ -22,7 +23,7 @@ import static org.springframework.context.annotation.FilterType.ASSIGNABLE_TYPE;
  */
 @DataJpaTest(includeFilters = @Filter(
         type = ASSIGNABLE_TYPE,
-        classes = {AuditorAwareImpl.class, AuditConfiguration.class}
+        classes = {AuditorAwareImpl.class, AuditConfiguration.class, RepositoryConfiguration.class}
 ))
 @RunWith(SpringRunner.class)
 public class BookRepositoryTest {
@@ -33,9 +34,11 @@ public class BookRepositoryTest {
     @Autowired
     private BookRepository repository;
 
+    private Book book;
+
     @Before
     public void save() {
-        em.persistAndFlush(
+        book = em.persistAndFlush(
                 Book.builder().author("Rudyard Kipling").title("Jungle Book").build()
         );
     }
@@ -52,11 +55,8 @@ public class BookRepositoryTest {
 
     @Test
     public void hasAuditInformation() {
-        Book book = repository.getOne(1L);
-
         assertThat(book)
                 .extracting(Book::getCreatedBy, Book::getCreatedDate, Book::getLastModifiedBy, Book::getLastModifiedDate, Book::getVersion)
                 .isNotNull();
-
     }
 }
