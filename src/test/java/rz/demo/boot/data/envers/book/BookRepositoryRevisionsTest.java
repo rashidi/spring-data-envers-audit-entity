@@ -67,7 +67,7 @@ public class BookRepositoryRevisionsTest {
         assertThat(revision)
                 .isPresent()
                 .hasValueSatisfying(rev ->
-                        assertThat(rev.getRevisionNumber()).hasValue(2)
+                        assertThat(rev.getRevisionNumber()).hasValue(3)
                 )
                 .hasValueSatisfying(rev ->
                         assertThat(rev.getEntity())
