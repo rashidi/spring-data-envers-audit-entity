@@ -72,7 +72,7 @@ public class BookRepositoryRevisionsTest {
                 .hasValueSatisfying(rev ->
                         assertThat(rev.getEntity())
                                 .extracting(Book::getTitle)
-                                .containsOnly("If")
+                                .isEqualTo("If")
                 );
     }
 
