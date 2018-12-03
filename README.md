@@ -1,4 +1,4 @@
-# Spring Data Envers: Audit With Entity Revisions [![Build Status](https://travis-ci.com/rashidi/spring-data-envers-audit-entity.svg?branch=master)](https://travis-ci.com/rashidi/spring-data-envers-audit-entity)
+# Spring Data Envers: Audit With Entity Revisions [![Build Status](https://travis-ci.com/rashidi/spring-data-envers-audit-entity.svg?branch=master)](https://travis-ci.com/rashidi/spring-data-envers-audit-entity) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=rashidi/spring-data-envers-audit-entity)](https://dependabot.com)
 Sample application that demonstrates entity revisions with [Spring Data Envers][1].
 
 # Background
