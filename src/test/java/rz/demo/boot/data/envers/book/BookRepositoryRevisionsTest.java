@@ -1,14 +1,12 @@
 package rz.demo.boot.data.envers.book;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.envers.repository.support.DefaultRevisionMetadata;
 import org.springframework.data.history.Revision;
 import org.springframework.data.history.Revisions;
-import org.springframework.test.context.junit4.SpringRunner;
 import rz.demo.boot.data.envers.audit.AuditRevisionEntity;
 
 import java.util.Iterator;
@@ -20,7 +18,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Rashidi Zin
  */
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class BookRepositoryRevisionsTest {
 
     @Autowired
@@ -28,7 +25,7 @@ public class BookRepositoryRevisionsTest {
 
     private Book book;
 
-    @Before
+    @BeforeEach
     public void save() {
         repository.deleteAll();
 

@@ -68,7 +68,6 @@ We will be utilising on `@SpringBootTest` to verify that our implementation work
 ### Upon Creation an Initial Revision is Created
 ```java
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class BookRepositoryRevisionsTest {
 
     @Autowired
@@ -95,7 +94,6 @@ public class BookRepositoryRevisionsTest {
 ### Revision Number Will Be Increase and Latest Revision is Available
 ```java
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class BookRepositoryRevisionsTest {
 
     @Autowired
@@ -130,7 +128,6 @@ public class BookRepositoryRevisionsTest {
 ### Upon Deletion All Entity Information Will be Removed Except its ID
 ```java
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class BookRepositoryRevisionsTest {
 
     @Autowired
