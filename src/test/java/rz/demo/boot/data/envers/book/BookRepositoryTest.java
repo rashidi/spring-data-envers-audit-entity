@@ -1,13 +1,11 @@
 package rz.demo.boot.data.envers.book;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.test.context.junit4.SpringRunner;
 import rz.demo.boot.data.envers.RepositoryConfiguration;
 import rz.demo.boot.data.envers.audit.AuditConfiguration;
 import rz.demo.boot.data.envers.audit.AuditorAwareImpl;
@@ -23,9 +21,8 @@ import static org.springframework.context.annotation.FilterType.ASSIGNABLE_TYPE;
  */
 @DataJpaTest(includeFilters = @Filter(
         type = ASSIGNABLE_TYPE,
-        classes = {AuditorAwareImpl.class, AuditConfiguration.class, RepositoryConfiguration.class}
+        classes = { AuditorAwareImpl.class, AuditConfiguration.class, RepositoryConfiguration.class }
 ))
-@RunWith(SpringRunner.class)
 public class BookRepositoryTest {
 
     @Autowired
@@ -36,7 +33,7 @@ public class BookRepositoryTest {
 
     private Book book;
 
-    @Before
+    @BeforeEach
     public void save() {
         book = em.persistAndFlush(
                 Book.builder().author("Rudyard Kipling").title("Jungle Book").build()
