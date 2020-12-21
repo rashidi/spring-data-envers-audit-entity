@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Rashidi Zin
  */
 @SpringBootTest
-public class BookRepositoryRevisionsTest {
+class BookRepositoryRevisionsTest {
 
     @Autowired
     private BookRepository repository;
@@ -35,7 +35,7 @@ public class BookRepositoryRevisionsTest {
     }
 
     @Test
-    public void initialRevision() {
+    void initialRevision() {
         Revisions<Integer, Book> revisions = repository.findRevisions(book.getId());
 
         assertThat(revisions)
@@ -54,7 +54,7 @@ public class BookRepositoryRevisionsTest {
     }
 
     @Test
-    public void updateIncreasesRevisionNumber() {
+    void updateIncreasesRevisionNumber() {
         book.setTitle("If");
 
         repository.save(book);
@@ -74,7 +74,7 @@ public class BookRepositoryRevisionsTest {
     }
 
     @Test
-    public void deletedItemWillHaveRevisionRetained() {
+    void deletedItemWillHaveRevisionRetained() {
         repository.delete(book);
 
         Revisions<Integer, Book> revisions = repository.findRevisions(book.getId());

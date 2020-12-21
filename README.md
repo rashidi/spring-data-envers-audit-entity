@@ -68,39 +68,39 @@ We will be utilising on `@SpringBootTest` to verify that our implementation work
 ### Upon Creation an Initial Revision is Created
 ```java
 @SpringBootTest
-public class BookRepositoryRevisionsTest {
+class BookRepositoryRevisionsTest {
 
     @Autowired
     private BookRepository repository;
     
-        @Test
-        public void initialRevision() {
-            Book book = repository.save(
-                                 Book.builder().author("Rudyard Kipling").title("Jungle Book").build()
-                         );
-            
-            Revisions<Integer, Book> revisions = repository.findRevisions(book.getId());
-    
-            assertThat(revisions)
-                    .isNotEmpty()
-                    .allSatisfy(revision -> assertThat(revision.getEntity())
-                            .extracting(Book::getId, Book::getAuthor, Book::getTitle)
-                            .containsExactly(book.getId(), book.getAuthor(), book.getTitle())
-                    );
-        }
+    @Test
+    void initialRevision() {
+        Book book = repository.save(
+                             Book.builder().author("Rudyard Kipling").title("Jungle Book").build()
+                     );
+        
+        Revisions<Integer, Book> revisions = repository.findRevisions(book.getId());
+
+        assertThat(revisions)
+                .isNotEmpty()
+                .allSatisfy(revision -> assertThat(revision.getEntity())
+                        .extracting(Book::getId, Book::getAuthor, Book::getTitle)
+                        .containsExactly(book.getId(), book.getAuthor(), book.getTitle())
+                );
+    }
 }
 ```
 
 ### Revision Number Will Be Increase and Latest Revision is Available
 ```java
 @SpringBootTest
-public class BookRepositoryRevisionsTest {
+class BookRepositoryRevisionsTest {
 
     @Autowired
     private BookRepository repository;
     
     @Test
-    public void updateIncreasesRevisionNumber() {
+    void updateIncreasesRevisionNumber() {
         Book book = repository.save(
                              Book.builder().author("Rudyard Kipling").title("Jungle Book").build()
                      );
@@ -128,13 +128,13 @@ public class BookRepositoryRevisionsTest {
 ### Upon Deletion All Entity Information Will be Removed Except its ID
 ```java
 @SpringBootTest
-public class BookRepositoryRevisionsTest {
+class BookRepositoryRevisionsTest {
 
     @Autowired
     private BookRepository repository;
     
     @Test
-    public void deletedItemWillHaveRevisionRetained() {
+    void deletedItemWillHaveRevisionRetained() {
         Book book = repository.save(
                              Book.builder().author("Rudyard Kipling").title("Jungle Book").build()
                      );

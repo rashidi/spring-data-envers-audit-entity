@@ -23,7 +23,7 @@ import static org.springframework.context.annotation.FilterType.ASSIGNABLE_TYPE;
         type = ASSIGNABLE_TYPE,
         classes = { AuditorAwareImpl.class, AuditConfiguration.class, RepositoryConfiguration.class }
 ))
-public class BookRepositoryTest {
+class BookRepositoryTest {
 
     @Autowired
     private TestEntityManager em;
@@ -41,7 +41,7 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void findAllByAuthor() {
+    void findAllByAuthor() {
         Stream<Book> booksByAuthor = repository.findAllByAuthor("Rudyard Kipling");
 
         assertThat(booksByAuthor)
@@ -51,7 +51,7 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void hasAuditInformation() {
+    void hasAuditInformation() {
         assertThat(book)
                 .extracting(Book::getCreatedBy, Book::getCreatedDate, Book::getLastModifiedBy, Book::getLastModifiedDate, Book::getVersion)
                 .isNotNull();
